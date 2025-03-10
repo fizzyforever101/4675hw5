@@ -5,6 +5,7 @@ SPDX-License-Identifier: Apache-2.0
 */
 
 // Author: Sabina Sokol
+// Based on the Hyperledger Fabric Example in fabric-samples/asset-transfer-basic/application-gateway-go 
 
 package main
 
@@ -66,7 +67,7 @@ func main() {
 	}
 	defer gw.Close()
 
-	// Override default values for chaincode and channel name as they may differ in testing contexts.
+	// Override default values for chaincode and channel name if necessary.
 	chaincodeName := "basic"
 	if ccname := os.Getenv("CHAINCODE_NAME"); ccname != "" {
 		chaincodeName = ccname
@@ -166,8 +167,8 @@ func readFirstFile(dirPath string) ([]byte, error) {
 	return os.ReadFile(path.Join(dirPath, fileNames[0]))
 }
 
-// This type of transaction would typically only be run once by an application the first time it was started after its
-// initial deployment. A new version of the chaincode deployed later would likely not need to run an "init" function.
+// initLedger is a transaction that would typically only be run once by an application the first time it was started after its
+// initial deployment.
 func initLedger(contract *client.Contract) {
 	fmt.Printf("\n--> Submit Transaction: InitLedger, function creates the initial set of assets on the ledger \n")
 
@@ -218,7 +219,7 @@ func readAssetByID(contract *client.Contract) {
 }
 
 // Submit transaction asynchronously, blocking until the transaction has been sent to the orderer, and allowing
-// this thread to process the chaincode response (e.g. update a UI) without waiting for the commit notification
+// this thread to process the chaincode response.
 func transferAssetAsync(contract *client.Contract) {
 	fmt.Printf("\n--> Async Submit Transaction: TransferAsset, updates existing asset owner")
 
@@ -239,7 +240,7 @@ func transferAssetAsync(contract *client.Contract) {
 	fmt.Printf("*** Transaction committed successfully\n")
 }
 
-// Submit transaction, passing in the wrong number of arguments ,expected to throw an error containing details of any error responses from the smart contract.
+// Submit transaction, expected to throw an error containing details of any error responses from the smart contract.
 func exampleErrorHandling(contract *client.Contract) {
 	fmt.Println("\n--> Submit Transaction: UpdateAsset asset70, asset70 does not exist and should return an error")
 
@@ -272,7 +273,7 @@ func exampleErrorHandling(contract *client.Contract) {
 	}
 
 	// Any error that originates from a peer or orderer node external to the gateway will have its details
-	// embedded within the gRPC status error. The following code shows how to extract that.
+	// embedded within the gRPC status error.
 	statusErr := status.Convert(err)
 
 	details := statusErr.Details()
