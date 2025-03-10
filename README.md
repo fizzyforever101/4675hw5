@@ -16,7 +16,7 @@ go version
 Before running this application, you need to set up the following:
 
 ### Install Hyperledger Fabric Test Network
-Ensure you have Hyperledger Fabric’s test network set up. This can be done by following the instructions in the [Hyperledger Fabric documentation](https://hyperledger-fabric.readthedocs.io/en/latest/test_network/).
+Ensure you have Hyperledger Fabric’s test network set up. This can be done by following the instructions in the [Hyperledger Fabric documentation](https://hyperledger-fabric.readthedocs.io/en/latest/test_network.html).
 
 The application assumes that the test network is available and the Fabric peer is running on `localhost:7051`.
 
@@ -98,6 +98,4 @@ go run webGatewayVerification.go
 
 The application includes an example of handling errors returned by the Fabric peer, such as invalid arguments or transaction failures.
 
-## License
 
-This project is licensed under the Apache 2.0 License - see the [LICENSE](LICENSE) file for details.
