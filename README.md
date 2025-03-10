@@ -82,7 +82,7 @@ export CHANNEL_NAME="your-channel-name"
 Once you’ve set up the network and installed the dependencies, you can run the application:
 
 ```bash
-go run main.go
+go run webGatewayVerification.go
 ```
 
 ### Overview of Transactions
